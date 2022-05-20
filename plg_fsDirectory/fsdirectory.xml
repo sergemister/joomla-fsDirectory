@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="4.0" group="system" method="upgrade">
+  <name>PLG_FSDIRECTORY</name>
+  <creationDate>2022-05-15</creationDate>
+  <author>Serge Mister</author>
+  <authorEmail>cf744@ncf.ca</authorEmail>
+  <copyright>2022</copyright>
+  <license>GNU General Public License Version 3 or any later version; see LICENSE file</license>
+  <version>1.0.0</version>
+  <description>PLG_FSDIRECTORY_XML_DESCRIPTION</description>
+  <namespace>Joomla\Plugin\FSDirectory</namespace>
+  <files>
+    <filename plugin="fsdirectory">fsdirectory.php</filename>
+    <folder>language</folder>
+    <filename>fsdirectory.xml</filename>
+  </files>
+</extension>

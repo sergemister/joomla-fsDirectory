@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="4.0" client="site" method="upgrade">
+  <name>MOD_FSDIRECTORY</name>
+  <creationDate>2022-05-15</creationDate>
+  <author>Serge Mister</author>
+  <authorEmail>cf744@ncf.ca</authorEmail>
+  <copyright>2022</copyright>
+  <license>GNU General Public License Version 3 or any later version; see LICENSE file</license>
+  <version>1.0.0</version>
+  <description>MOD_FSDIRECTORY_XML_DESCRIPTION</description>
+  <namespace>Joomla\Module\FSDirectory</namespace>
+  <files>
+    <filename module="mod_fsdirectory">mod_fsdirectory.php</filename>
+    <filename>mod_fsdirectory.xml</filename>
+    <folder>tmpl</folder>
+    <folder>Helper</folder>
+    <folder>language</folder>
+  </files>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+	<field name="displayName"
+	       type="text"
+	       label="MOD_FSDIRECTORY_DISPLAY_NAME_LABEL" />
+	<field name="path"
+	       type="text"
+	       label="MOD_FSDIRECTORY_PATH_LABEL" />
+	<field name="recurse"
+	       type="checkbox"
+	       label="MOD_FSDIRECTORY_RECURSE_LABEL"
+	       checked="0" />
+	<field name="allowedExtensions"
+	       type="text"
+	       label="MOD_FSDIRECTORY_ALLOWED_EXTENSIONS_LABEL"
+	       default="pdf" />
+	<field name="target"
+	       type="text"
+	       label="MOD_FSDIRECTORY_TARGET_LABEL" />
+      </fieldset>
+    </fields>
+  </config>
+</extension>
