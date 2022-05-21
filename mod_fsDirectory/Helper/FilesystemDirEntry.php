@@ -124,7 +124,7 @@ class FilesystemDirEntry {
 	   support URL paths, so : could denote the end of the URL
 	   scheme */
 	if (strpos($this->fullPath, ':')===false) {
-	    log::add("fsDirectory - File content of {$this->fullPath} being sent");
+	    log::add("fsDirectory - File content of {$this->fullPath} being sent", Log::INFO);
 	    $content=file_get_contents($this->fullPath);
 	    if ($content===false) {
 		return false;

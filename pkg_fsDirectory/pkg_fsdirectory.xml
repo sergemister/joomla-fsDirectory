@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="package" version="4.0" method="upgrade">
-  <name>PKG_FSDIRECTORY</name>
+  <name>Filesystem Directory Package</name>
   <creationDate>2022-05-15</creationDate>
   <author>Serge Mister</author>
   <authorEmail>cf744@ncf.ca</authorEmail>
@@ -8,10 +8,9 @@
   <license>GNU General Public License Version 3 or any later version; see LICENSE file</license>
   <packagename>fsdirectory</packagename>
   <version>1.0.0</version>
-  <description>PKG_FSDIRECTORY_XML_DESCRIPTION</description>
+  <description>Plugin and module enabling downloading of files in a directory</description>
   <files folder="packages">
     <file type="module" id="mod_fsdirectory" client="site">mod_fsdirectory.zip</file>
     <file type="plugin" id="fsdirectory" group="system">plg_fsdirectory.zip</file>
-    <folder>language</folder>
   </files>
 </extension>

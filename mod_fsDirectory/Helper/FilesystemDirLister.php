@@ -9,6 +9,7 @@
 
 namespace Joomla\Module\FSDirectory\Site\Helper;
 
+use Joomla\CMS\Log\Log;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Registry\Registry;
 
@@ -113,6 +114,11 @@ class FilesystemDirLister {
 	    $allowedExtensionsArray=explode(',', $this->param_allowedExtensions);
 	}
 
+	if ($params_path=='') {
+	    $params_ok=false;
+	    log::add("fsDirectory - Module path parameter cannot be empty", Log::ERROR);
+	}
+	
 	if ($params_ok && $this->isDir) {
 	    $path=$this->param_path;
 	    do {
@@ -150,18 +156,18 @@ class FilesystemDirLister {
 		$this->dirEntries=$dirEntries;
 	    }
 	} else {
-	    // We may eventually support a single file being specified
+	    log::add("fsDirectory - Module path parameter is not a directory or error in parameters", Log::ERROR);
 	}
     }
 
     /** Returns true if $fileName has a file extension allowed by
-        $allowedExtensions.
+       $allowedExtensions.
 
-        @param $allowedExtensions - An array of extensions that are
-        allowed (without a leading .), or null if all extensions are
-        allowed.
+       @param $allowedExtensions - An array of extensions that are
+       allowed (without a leading .), or null if all extensions are
+       allowed.
 
-        @param $fileName - The file name to be checked. */
+       @param $fileName - The file name to be checked. */
     private static function extensionAllowed($allowedExtensions, string $fileName): bool {
 	if ($allowedExtensions===null) {
 	    return true;
@@ -179,7 +185,7 @@ class FilesystemDirLister {
     }
 
     /** Returns the URL of the parent directory, or null if the
-        current directory is the root */
+       current directory is the root */
     public function getParentURL() {
     	$subpathVar=self::getSubpathVar($this->moduleId);
 	if (is_null($this->parentSubpath)) {
@@ -205,7 +211,7 @@ class FilesystemDirLister {
     }
 
     /** Returns the name of the subpath query string variable for the
-        given module id */
+       given module id */
     public static function getSubpathVar(int $moduleId): string {
 	return "subpath$moduleId";
     }

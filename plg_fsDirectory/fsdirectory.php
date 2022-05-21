@@ -15,6 +15,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Log\Log;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Event\SubscriberInterface;
@@ -56,10 +57,16 @@ class PlgSystemFSDirectory extends CMSPlugin implements SubscriberInterface {
 	if ($module->id==0) {
 	    /* Module not found; this may be because the user needs to
 	       login */
+	    if (JDEBUG) {
+		log::add("fsDirectory - Module $input_moduleId not found", Log::DEBUG);
+	    }
 	    return true;
 	}
 
 	if ($module->module!='mod_fsdirectory') {
+	    if (JDEBUG) {
+		log::add("fsDirectory - Module $input_moduleId is not an fsDirectory module", Log::DEBUG);
+	    }
 	    return true;
 	}
 
