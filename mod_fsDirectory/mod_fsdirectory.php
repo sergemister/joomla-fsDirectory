@@ -36,7 +36,8 @@ $param_target=trim($params->get('target','','STRING'));
 /* The name of the subpath parameter specific to the module */
 $subpathVar=FilesystemDirLister::getSubpathVar($module->id);
 
-$input_subpath=$app->input->get($subpathVar,'','PATH');
+/* Using 'STRING' rather than 'PATH' to allow file names with spaces */
+$input_subpath=$app->input->get($subpathVar,'','STRING');
 
 /* Below are the variables that will be accessed by the template */
 $dirInfo=new FilesystemDirLister($module, $input_subpath, true);

@@ -49,7 +49,8 @@ class PlgSystemFSDirectory extends CMSPlugin implements SubscriberInterface {
 	/* If we get here, our plugin has the query parameters that
 	   suggest the plugin was deliberately invoked */
 
-	$input_subpath=$this->app->input->get('subpath','','PATH');
+	/* Using 'STRING' rather than 'PATH' to allow file names with spaces */
+	$input_subpath=$this->app->input->get('subpath','','STRING');
 
 	/* getModuleById only returns modules that are published and
 	   accessible according to the ACL */

@@ -66,6 +66,10 @@ class FilesystemDirLister {
     public function __construct($module, string $input_subpath, bool $loadDescriptions) {
 	// TODO Implement loadDescriptions
 
+	if (JDEBUG) {
+	    log::add("fsDirectory - Directory Lister; subpath '$input_subpath'", Log::DEBUG);
+	}
+	
 	// Gets set to false if the input values are not valid
 	$params_ok=true;
 	
@@ -114,9 +118,9 @@ class FilesystemDirLister {
 	    $allowedExtensionsArray=explode(',', $this->param_allowedExtensions);
 	}
 
-	if ($params_path=='') {
+	if ($this->param_path=='') {
 	    $params_ok=false;
-	    log::add("fsDirectory - Module path parameter cannot be empty", Log::ERROR);
+	    log::add('fsDirectory - Module path parameter cannot be empty', Log::ERROR);
 	}
 	
 	if ($params_ok && $this->isDir) {
@@ -156,7 +160,7 @@ class FilesystemDirLister {
 		$this->dirEntries=$dirEntries;
 	    }
 	} else {
-	    log::add("fsDirectory - Module path parameter is not a directory or error in parameters", Log::ERROR);
+	    log::add('fsDirectory - Module path parameter is not a directory or error in parameters', Log::ERROR);
 	}
     }
 
@@ -196,7 +200,7 @@ class FilesystemDirLister {
 	if ($this->parentSubpath=='') {
 	    $currentPage->delVar($subpathVar);
 	} else {
-	    $currentPage->setVar($subpathVar,$this->parentSubpath);
+	    $currentPage->setVar($subpathVar,urlencode($this->parentSubpath));
 	}
 	return $currentPage->toString();
     }

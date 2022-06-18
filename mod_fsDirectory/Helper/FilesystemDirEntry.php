@@ -7,6 +7,11 @@
  * @copyright 2022
  **/
 
+/* Joomla's Uri class query string construction code calls
+   urldecode(http_build_query()) (see
+   https://github.com/joomla-framework/uri/blob/2.0-dev/src/AbstractUri.php#L347).
+   This seems incorrect.  To compensate, we call
+   setVar(name,urlencode(value)) */
 namespace Joomla\Module\FSDirectory\Site\Helper;
 
 use Joomla\CMS\Log\Log;
@@ -86,15 +91,15 @@ class FilesystemDirEntry {
 	    } else {
 		$subpath=$this->subpath.DIRECTORY_SEPARATOR.$this->name;
 	    }
-	    $currentPage->setVar($subpathVar, $subpath);
+	    $currentPage->setVar($subpathVar, urlencode($subpath));
 	    return $currentPage->toString();
 	} else {
 	    $currentPage->delVar($subpathVar);
-	    $currentPage->setVar('module', $this->moduleId);
+	    $currentPage->setVar('module', urlencode($this->moduleId));
 	    if ($this->subpath!='') {
-		$currentPage->setVar('subpath', $this->subpath);
+		$currentPage->setVar('subpath', urlencode($this->subpath));
 	    }
-	    $currentPage->setVar('fsdownload', $this->name);
+	    $currentPage->setVar('fsdownload', urlencode($this->name));
 	    return $currentPage->toString();
 	}
     }
