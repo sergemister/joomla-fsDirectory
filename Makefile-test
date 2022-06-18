@@ -1,0 +1,58 @@
+# The base output directory
+OUTPUT_DIR=output
+
+# Name of base directory for test documents
+TD=testDocuments
+
+# Subdirectory for test document library, relative to the output directory
+TDL=$(TD)/TestDocumentLibrary
+
+# Test document library directory path, relative to working directory
+TDL_BASE=$(OUTPUT_DIR)/$(TDL)
+
+# The name of the directory to use to test special character handling
+SPECIALCHARS_DIR='abc\">&def'
+
+# Test image file image dimensions (<width>x<height>, in pixels)
+SIZE=256x32
+
+# Test image file text font size (points)
+TEXTSIZE=24
+
+.PHONY: testfiles
+
+testfiles: $(TDL_BASE)
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:red    -draw 'text 0,0 "secret image"'         "$(TDL_BASE)/../secret.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:blue   -draw 'text 0,0 "first image"'          "$(TDL_BASE)/first image.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:green  -draw 'text 0,0 "first image jpg"'      "$(TDL_BASE)/firstImage.jpeg"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:yellow -draw 'text 0,0 "second image"'         "$(TDL_BASE)/second image.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:orange -draw 'text 0,0 "second image jpg"'     "$(TDL_BASE)/secondImage.jpeg"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:orange -draw 'text 0,0 "colon image"'          "$(TDL_BASE)/colon:Image.jpeg"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:yellow -draw 'text 0,0 "special chars image"'  "$(TDL_BASE)/special_!<b>&'\"_chars.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:red    -draw 'text 0,0 "hidden image"'         "$(TDL_BASE)/.hidden.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:cyan   -draw 'text 0,0 "sub1 image"'           "$(TDL_BASE)/sub1/imageSub1.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:brown  -draw 'text 0,0 "sub1/sub2 image"'      "$(TDL_BASE)/sub1/sub2/imageSub2.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:purple -draw 'text 0,0 "subA image"'           "$(TDL_BASE)/sub A/subA image.png"
+	convert -size $(SIZE) -pointsize $(TEXTSIZE) -gravity center radial-gradient:purple -draw 'text 0,0 "special image"'        "$(TDL_BASE)/$(SPECIALCHARS_DIR)/special image.png"
+	echo "Example PDF file" | groff | ps2pdf - >"$(TDL_BASE)/example.pdf"
+	echo "Example text file" >"$(TDL_BASE)/example2.pdf.txt"
+	(cd "$(OUTPUT_DIR)" && zip testDocuments.zip\
+			      "$(TD)/secret.png" \
+			      "$(TDL)/first image.png" \
+			      "$(TDL)/firstImage.jpeg" \
+			      "$(TDL)/second image.png" \
+			      "$(TDL)/secondImage.jpeg" \
+			      "$(TDL)/colon:Image.jpeg" \
+			      "$(TDL)/special_!<b>&'\"_chars.png" \
+			      "$(TDL)/.hidden.png" \
+			      "$(TDL)/sub1/imageSub1.png" \
+			      "$(TDL)/sub1/sub2/imageSub2.png" \
+			      "$(TDL)/sub A/subA image.png" \
+			      "$(TDL)/$(SPECIALCHARS_DIR)/special image.png" \
+			      "$(TDL)/example.pdf" \
+			      "$(TDL)/example2.pdf.txt" )
+
+$(TDL_BASE):
+	mkdir -p "$(TDL_BASE)/sub1/sub2"
+	mkdir "$(TDL_BASE)/sub A"
+	mkdir "$(TDL_BASE)/$(SPECIALCHARS_DIR)"

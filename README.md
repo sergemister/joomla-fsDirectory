@@ -134,3 +134,17 @@ To make a filesystem directory accessible:
 To uninstall the `fsDirectory` extension, simply uninstall the
 `fsDirectory` package in the Joomla backend.  The module and plugin
 will be uninstalled automatically.
+
+## Testing
+
+The Makefile `Makefile-test` can be used to create a directory structure for testing the extension.  This Makefile depends on:
+
+* convert (from ImageMagick)
+* groff
+* ps2pdf
+
+Generate the test files by running
+
+    make -f Makefile-test
+
+The test directory structure can then be found in `output/testDocuments.zip`.
