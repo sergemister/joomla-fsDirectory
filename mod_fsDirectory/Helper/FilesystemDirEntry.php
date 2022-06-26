@@ -138,6 +138,7 @@ class FilesystemDirEntry {
 	    if ($contentType==false) {
 		$contentType='application/octet-stream';
 	    }
+	    $app->setHeader('Cache-Control', 'no-store', true);
 	    $app->setHeader('Content-Type', $contentType, true);
 	    if ($contentType=='application/pdf') {
 		$deliveryType='inline';

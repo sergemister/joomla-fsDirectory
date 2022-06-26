@@ -48,7 +48,7 @@ This software is licensed under the GNU General Public License Version
     1. Clone this Github repository onto a Linux system.
     2. Make sure that `make` and `zip` are available.
     3. Execute `make`; the package will be available in the file
-       `output/fsDirectory.zip`.
+       `output/pkg_fsDirectory.zip`.
 
 2. Install the package using the Joomla backend.  In the extensions manager there will be three items added:
     - The `fsDirectory` package
